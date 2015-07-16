@@ -2,23 +2,23 @@
   "name": "dss",
   "description": "Documented Style Sheets",
   "version": "1.0.4",
-  "homepage": "https://github.com/darcyclarke/dss",
+  "homepage": "https://github.com/sethlilly/dss",
   "author": {
-    "name": "darcyclarke",
-    "email": "darcy@darcyclarke.me",
-    "url": "https://darcyclarke.me"
+    "name": "sethlilly",
+    "email": "seth.lilly@gmail.com",
+    "url": "http://sethlilly.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/darcyclarke/dss"
+    "url": "https://github.com/sethlilly/dss"
   },
   "bugs": {
-    "url": "https://github.com/darcyclarke/dss/issues"
+    "url": "https://github.com/sethlilly/dss/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/darcyclarke/dss/blob/master/LICENSE-MIT"
+      "url": "https://github.com/sethlilly/dss/blob/master/LICENSE-MIT"
     }
   ],
   "main": "dss.js",
