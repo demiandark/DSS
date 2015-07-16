@@ -481,9 +481,10 @@ dss.parser( 'state', function() {
 
 // Describe default parsing of a piece markup
 dss.parser( 'markup', function() {
+    console.log(this.line.contents);
     return [ {
-        example: this.block.contents,
-        escaped: this.block.contents.replace( /</g, '&lt;' ).replace( />/g, '&gt;' )
+        example: this.line.contents,
+        escaped: this.line.contents.replace( /</g, '&lt;' ).replace( />/g, '&gt;' )
     } ];
 } );
 
