@@ -173,13 +173,7 @@ var dss = (function() {
 
     };
 
-    /*
-     * Takes a file and extracts comments from it.
-     *
-     * @param (Object) options
-     * @param (Function) callback
-     */
-    _dss.parse = function( lines, options, callback ) {
+    _dss._parse = function( lines, options ) {
 
         // Options
         options                     = ( options ) ? options : {};
@@ -283,8 +277,28 @@ var dss = (function() {
         } );
 
         // Execute callback with filename and blocks
-        callback( { blocks: blocks } );
+        return blocks;
 
+    };
+
+
+    /*
+     * Takes a file and extracts comments from it.
+     *
+     * @param (Object) options
+     * @param (Function) callback
+     */
+    _dss.parse = function ( lines, options, callback ) {
+        callback( { blocks: _dss._parse( lines, options ) } );
+    };
+
+    /*
+     * Takes a file and extracts comments from it.
+     *
+     * @param (Object) options
+     */
+    _dss.parseSync = function ( lines, options ) {
+        return _dss._parse( lines, options );
     };
 
     /*
