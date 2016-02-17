@@ -56,6 +56,9 @@ dss.parse( fileContents, {}, function ( parsedObject ) {
 
 });
 
+// Or you can get parsedObject by use parseSync function
+var parsedObject = dss.parseSync( fileContents, {} );
+
 ````
 
 ##### Example Output
