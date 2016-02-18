@@ -459,6 +459,12 @@ var dss = (function() {
 
 })();
 
+function _trimmer(string) {
+    if (string.indexOf('@') !== -1) string = string.split('@')[0];
+    if (string.indexOf('\n') !== -1) string = string.split('\n')[0];
+    return string.trim();
+}
+
 // Describe default detection pattern
 dss.detector( function( line ) {
     if( typeof line !== 'string' ) {
@@ -470,35 +476,53 @@ dss.detector( function( line ) {
 
 // Describe default parsing of a name
 dss.parser( 'name', function() {
-    return this.line.contents;
+    return _trimmer(this.line.contents);
 } );
 
 // Describe default parsing of a description
 dss.parser( 'description', function() {
-    return this.line.contents;
+    return _trimmer(this.line.contents);
 } );
 
 // Describe parsing a requirement
 dss.parser( 'requires', function() {
-    return this.line.contents;
+    return _trimmer(this.line.contents);
 } );
 
 // Describe default parsing of a state
 dss.parser( 'state', function() {
     var state = this.line.contents.split( ' - ' );
-    return [ {
+    return {
         name: ( state[ 0 ] ) ? dss.trim( state[ 0 ] ) : '',
         escaped: ( state[ 0 ] ) ? dss.trim( state[ 0 ].replace( '.', ' ' ).replace( ':', ' pseudo-class-' ) ) : '',
-        description: ( state[ 1 ] ) ? dss.trim( state[ 1 ] ) : ''
-    } ];
+        description: ( state[ 1 ] ) ? dss.trim( state[ 1 ] ).split('@')[0] : ''
+    };
+} );
+
+// Describe default parsing of a modifier
+dss.parser( 'modifier', function() {
+    var modifier = this.line.contents.split( ' - ' );
+    return {
+        name: ( modifier[ 0 ] ) ? _trimmer(dss.trim( modifier[ 0 ] )) : '',
+        escaped: ( modifier[ 0 ] ) ? _trimmer(dss.trim( modifier[ 0 ].replace( '.', ' ' ).replace( ':', ' pseudo-class-' ) )) : '',
+        description: ( modifier[ 1 ] ) ? _trimmer(dss.trim( modifier[ 1 ] )) : ''
+    };
 } );
 
 // Describe default parsing of a piece markup
 dss.parser( 'markup', function() {
-    return [ {
-        example: this.line.contents,
+    return {
+        example: _trimmer(this.line.contents),
         escaped: this.line.contents.replace( /</g, '&lt;' ).replace( />/g, '&gt;' )
-    } ];
+    };
+} );
+
+// Describe default parsing of a jade
+dss.parser( 'jade', function() {
+    return {
+        example: _trimmer(this.line.contents),
+        escaped: this.line.contents.replace( /</g, '&lt;' ).replace( />/g, '&gt;' )
+    };
 } );
 
 // Module exports
